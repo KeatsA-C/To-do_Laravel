@@ -2,13 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Task;
+use Livewire\Component;
 
 class TaskModal extends Component
 {
+    protected $listeners = ['open-task-modal' => 'openModal'];
+
     public $showModal = false;
-    public $title, $description, $due_date;
+
+    public $title;
+
+    public $description;
+
+    public $due_date;
 
     public function openModal()
     {

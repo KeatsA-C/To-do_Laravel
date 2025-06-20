@@ -6,36 +6,34 @@
     </button>
 
     <!-- Modal Overlay -->
-    @if ($showModal)
-        <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-40">
-            <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md relative">
-                <h2 class="text-xl font-semibold mb-4">Create New Task</h2>
+@if ($showModal)
+<div class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow max-w-md w-full">
+        <h2 class="text-lg font-bold mb-4">Add Task</h2>
 
-                <form wire:submit.prevent="save">
-                    <div class="mb-4">
-                        <label class="block mb-1 text-sm font-medium">Title</label>
-                        <input type="text" wire:model="title" class="w-full border rounded p-2" required>
-                        @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block mb-1 text-sm font-medium">Description</label>
-                        <textarea wire:model="description" class="w-full border rounded p-2"></textarea>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block mb-1 text-sm font-medium">Due Date</label>
-                        <input type="date" wire:model="due_date" class="w-full border rounded p-2">
-                    </div>
-
-                    <div class="flex justify-end gap-2">
-                        <button type="button" wire:click="closeModal" class="text-gray-600 hover:underline">Cancel</button>
-                        <button type="submit" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">
-                            Save Task
-                        </button>
-                    </div>
-                </form>
+        <form wire:submit.prevent="save" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium">Title</label>
+                <input type="text" wire:model="title" class="w-full border rounded p-2" required>
             </div>
-        </div>
-    @endif
+
+            <div>
+                <label class="block text-sm font-medium">Description</label>
+                <textarea wire:model="description" class="w-full border rounded p-2"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Due Date</label>
+                <input type="date" wire:model="due_date" class="w-full border rounded p-2">
+            </div>
+
+            <div class="flex justify-end gap-2">
+                <button type="button" wire:click="closeModal" class="text-gray-500">Cancel</button>
+                <button type="submit" class="bg-cyan-600 text-white px-4 py-2 rounded">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+@endif
+
 </div>
