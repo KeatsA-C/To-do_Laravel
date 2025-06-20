@@ -15,5 +15,7 @@
                 @endif
             </div>
         @endforeach
+        @livewire('task-modal')
+
     </div>
 </div>
