@@ -46,25 +46,24 @@ class Calendar extends Component
     public function render()
     {
         $startOfMonth = Carbon::create($this->currentYear, $this->currentMonth, 1);
-        $daysInMonth = $startOfMonth->daysInMonth;
-        $startDay = $startOfMonth->startOfWeek(Carbon::SUNDAY);
-        $endDay = $startOfMonth->copy()->endOfMonth()->endOfWeek(Carbon::SATURDAY);
+        $startDayOfWeek = $startOfMonth->dayOfWeek; // 0 = Sunday
+
+        $startDate = $startOfMonth->copy()->subDays($startDayOfWeek); // back to Sunday
 
         $days = [];
-        $current = $startDay->copy();
 
-        while ($current->lte($endDay)) {
+        for ($i = 0; $i < 35; $i++) { // 5 weeks * 7 days
+            $date = $startDate->copy()->addDays($i);
+
             $tasks = Task::where('user_id', auth()->id())
-                ->whereDate('due_date', $current->toDateString())
+                ->whereDate('due_date', $date->toDateString())
                 ->get();
 
             $days[] = [
-                'date' => $current->copy(),
-                'isCurrentMonth' => $current->month == $startOfMonth->month,
+                'date' => $date,
+                'isCurrentMonth' => $date->month === $startOfMonth->month,
                 'tasks' => $tasks,
             ];
-
-            $current->addDay();
         }
 
         return view('livewire.pages.calendar', [

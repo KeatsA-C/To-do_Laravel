@@ -1,5 +1,4 @@
 <div class="space-y-6">
-
     {{-- Calendar Navigation --}}
     <div class="mb-4 flex justify-between items-center">
         <button wire:click="previousMonth" class="text-cyan-600 hover:underline">← Previous</button>
@@ -14,7 +13,7 @@
         @endforeach
     </div>
 
-    {{-- Day Cells --}}
+    {{-- Calendar Grid (Already includes gray days in $days) --}}
     <div class="grid grid-cols-7 gap-2 text-sm">
         @foreach($days as $day)
             <div wire:click="selectDate('{{ $day['date']->toDateString() }}')"

@@ -3,8 +3,8 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Task;
-use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
 
 #[Layout('layouts.app')] // ✅ Add this line
 class Dashboard extends Component
