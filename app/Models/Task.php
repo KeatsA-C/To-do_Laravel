@@ -9,6 +9,11 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'completed' => 'boolean',
+        'due_date' => 'datetime',
+    ];
+
     protected $fillable = [
         'user_id',        // ✅ Allow mass-assignment of user_id
         'title',

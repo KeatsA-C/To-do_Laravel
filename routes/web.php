@@ -2,15 +2,16 @@
 
 use App\Livewire\Pages\Calendar;
 use App\Livewire\Pages\Dashboard;
+use App\Livewire\Pages\Settings;
 use Illuminate\Support\Facades\Route;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/settings', Settings::class)->name('settings');
+});
 
 Route::get('/calendar', Calendar::class)->name('calendar');
 
 Route::get('/', Dashboard::class)->name('dashboard');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-});
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

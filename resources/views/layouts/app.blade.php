@@ -35,7 +35,8 @@
                 <nav class="p-4 space-y-2">
                     <a href="{{ route('dashboard') }}" class="block py-2 px-3 rounded hover:bg-cyan-100">Dashboard</a>
                     <a href="{{ route('calendar') }}" class="block py-2 px-3 rounded hover:bg-cyan-100">Calendar</a>
-                    <a href="#" class="block py-2 px-3 rounded hover:bg-cyan-100">Settings</a>
+                    <a href="{{ route('settings') }}" class="block py-2 px-3 rounded hover:bg-cyan-100">Settings</a>
+
 
                     @auth
                         <form method="POST" action="{{ route('logout') }}">
