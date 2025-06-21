@@ -17,7 +17,8 @@
                 <div class="text-xl font-bold">📅 To-Do App</div>
                 @auth
                     <div class="flex items-center gap-2">
-                        <img src="{{ Auth::user()->profile_photo_url }}" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <img src="{{ Auth::user()->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}" class="w-8 h-8 rounded-full" alt="Avatar">
+
                         <span>{{ Auth::user()->name }}</span>
                     </div>
                 @else
