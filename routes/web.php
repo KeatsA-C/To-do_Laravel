@@ -4,6 +4,7 @@ use App\Livewire\Pages\Calendar;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\Settings;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/settings', Settings::class)->name('settings');
@@ -18,7 +19,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 require __DIR__.'/auth.php';
-use Illuminate\Support\Facades\Auth;
+
 
 Route::post('/logout', function () {
     Auth::logout();

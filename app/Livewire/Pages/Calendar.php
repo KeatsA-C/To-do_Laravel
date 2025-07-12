@@ -4,19 +4,13 @@ namespace App\Livewire\Pages;
 
 use App\Models\Task;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Redirect;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Calendar extends Component
 {
     public $currentMonth;
-
     public $currentYear;
-
-    public function selectDate($date)
-    {
-        return Redirect::route('dashboard', ['date' => $date]);
-    }
 
     public function mount()
     {
@@ -42,19 +36,20 @@ class Calendar extends Component
         $this->currentYear = $date->year;
     }
 
+    public function selectDate($date)
+    {
+        $this->dispatch('redirect-to-date', date: $date);
+    }
+
     public function render()
     {
         $startOfMonth = Carbon::create($this->currentYear, $this->currentMonth, 1);
-        $startDayOfWeek = $startOfMonth->dayOfWeek; // 0 = Sunday
-
-        // Get the Sunday before the first day of the month
+        $startDayOfWeek = $startOfMonth->dayOfWeek;
         $startDate = $startOfMonth->copy()->subDays($startDayOfWeek);
 
         $days = [];
-
-        for ($i = 0; $i < 35; $i++) { // Display a 5-week calendar grid
+        for ($i = 0; $i < 35; $i++) {
             $date = $startDate->copy()->addDays($i);
-
             $tasks = Task::where('user_id', auth()->id())
                 ->whereDate('due_date', $date->toDateString())
                 ->get();
